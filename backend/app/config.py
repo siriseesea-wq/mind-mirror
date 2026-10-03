@@ -5,7 +5,9 @@
 import os
 from datetime import timedelta
 
-BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+from .paths import runtime_root
+
+BASE_DIR = runtime_root()  # 数据库/日志等可写目录（开发：backend/；打包后：exe 同级目录）
 
 
 class BaseConfig:

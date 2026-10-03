@@ -9,11 +9,10 @@ import os
 
 from flask import Blueprint, send_from_directory
 
-from ..config import BASE_DIR  # backend/ 目录
+from ..paths import static_root
 
-PROJECT_ROOT = os.path.dirname(BASE_DIR)          # mind-mirror/ 项目根
-PATIENT_DIR = os.path.join(PROJECT_ROOT, "frontend-patient")
-DOCTOR_DIR = os.path.join(PROJECT_ROOT, "frontend-doctor")
+PATIENT_DIR = os.path.join(static_root(), "frontend-patient")
+DOCTOR_DIR = os.path.join(static_root(), "frontend-doctor")
 
 bp = Blueprint("pages", __name__)
 

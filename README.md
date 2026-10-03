@@ -100,6 +100,29 @@ sudo certbot --nginx -d YOUR_DOMAIN
 
 数据库迁移：开发环境自动建表；生产环境使用 `flask db init/migrate/upgrade`（Flask-Migrate 已配置）。
 
+## 打包为可执行文件（便携部署）
+
+无需安装 Python 环境即可运行整个平台（单文件，内置 Flask + 两套前端 + 种子数据）：
+
+```bash
+bash packaging/build.sh        # Linux / macOS → dist/mind-mirror
+# Windows 上执行 packaging\build.bat → dist\mind-mirror.exe
+```
+
+运行（任意目录，双击或命令行均可）：
+
+```bash
+./mind-mirror                  # 默认 http://127.0.0.1:8000
+./mind-mirror --host 0.0.0.0 --port 8080   # 对外提供服务
+```
+
+首次运行自动完成：创建数据库（`mind_mirror.db`，与程序同级）、写入种子数据、
+生成登录密钥（`secret_key.txt`）。管理员账号 `admin / Admin@1234`（首登强制改密）。
+停止服务：Ctrl+C。重置数据：删除程序同级的 `mind_mirror.db` 后重新运行。
+
+> 注：产物按平台区分——Linux 上构建的是 Linux 可执行文件，Windows `.exe` 需在
+> Windows 上运行 `build.bat`（PyInstaller 不支持跨平台交叉编译）。
+
 ## 文档
 
 - 完整需求文档（单一文件）：`docs/心镜-技术需求规格说明书-v1.0.md`

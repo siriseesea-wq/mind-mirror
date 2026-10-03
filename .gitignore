@@ -23,3 +23,9 @@ nohup.out
 .idea/
 .vscode/
 *.swp
+
+# 打包产物
+/dist/
+/build/
+*.spec.bak
+secret_key.txt

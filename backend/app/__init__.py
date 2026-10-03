@@ -23,8 +23,9 @@ def create_app(config_name="default"):
     migrate.init_app(app, db)
     cors.init_app(app, resources={r"/api/*": {"origins": "*"}})
 
-    # 日志：控制台 + 文件（backend/logs/app.log），便于排查线上问题
-    log_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "logs")
+    # 日志：控制台 + 文件（logs/app.log），便于排查线上问题
+    from .paths import runtime_root
+    log_dir = os.path.join(runtime_root(), "logs")
     os.makedirs(log_dir, exist_ok=True)
     logging.basicConfig(
         level=logging.INFO,
