@@ -7,6 +7,7 @@
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](backend/requirements.txt)
 [![Flask](https://img.shields.io/badge/Framework-Flask-lightgrey)](backend/app)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![CI](https://github.com/siriseesea-wq/mind-mirror/actions/workflows/ci.yml/badge.svg)](https://github.com/siriseesea-wq/mind-mirror/actions/workflows/ci.yml)
 
 核心设计理念：**简约可拓展 · 以患者为中心 · 医生/家长看详细**（详见 `docs/`）。
 

@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: 安装依赖
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r backend/requirements.txt
+
+      - name: 单元与集成测试
+        run: cd backend && python -m pytest tests/ -q
+
+      - name: 冒烟测试（全流程 + 患者端契约）
+        run: |
+          cd backend
+          python launcher.py > server.log 2>&1 &
+          sleep 6
+          python scripts/smoke_flow.py
+          pkill -f launcher.py || true
+          sleep 1
+          rm -f mind_mirror.db
+          python launcher.py > server.log 2>&1 &
+          sleep 6
+          python scripts/smoke_patient_ui.py
+          pkill -f launcher.py || true
